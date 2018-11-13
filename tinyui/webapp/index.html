@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+		<title>DevXdemo</title>
+		<script id="sap-ui-bootstrap"
+					src="https://sapui5.hana.ondemand.com/resources/sap-ui-core.js"
+					data-sap-ui-libs="sap.m, sap.ui.table"
+					data-sap-ui-theme="sap_belize">
+		</script>
+		<script>
+			var oModel = new sap.ui.model.odata.v2.ODataModel("/sap/opu/odata/euro.xsodata", true);
+			oModel.attachMetadataLoaded(null, function(){
+			   var oMetadata = oModel.getServiceMetadata();
+			   console.log(oMetadata);
+			},null);
+			//var oModel = new sap.ui.model.odata.ODataModel("/euro.xsodata", true);
+			var oTable = new sap.ui.table.Table({ title: "European Countries" });
+			oTable.addColumn(new sap.ui.table.Column({ label: "Country Name", template: "name" }));
+			oTable.setModel(oModel); oTable.bindRows("/euro"); oTable.placeAt("content");
+		</script>
+		</head>
+<body class="sapUiBody"> <div id="content"></div> </body>
+</html>
